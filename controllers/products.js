@@ -1,8 +1,8 @@
 'use strict'
 
-const Product = require('./models/product.js')
+const Product = require('../models/product.js')
 
-function getProduct (req, res){
+function getProduct(req, res){
 	let productId = req.params.productId
 
 	Product.findById(productId, (err, product) => {
@@ -10,10 +10,10 @@ function getProduct (req, res){
 		if(!product) res.status(404).send({message: `El producto no existe`})
 		res.status(200).send({ product })
 	})
-	
-} 
 
-function getProducts (req, res){
+}
+
+function getProducts(req, res){
 	Product.find({}, (err, products) => {
 		if(err) res.status(500).send({message: `Error al realizar la peticion ${err}`})
 		if(!products) res.status(404).send({message: `No existen productos`})
@@ -66,7 +66,7 @@ function deleteProduct(req, res){
 	})
 }
 
-exports = {
+module.exports = {
 	getProduct,
 	getProducts,
 	saveProduct,
